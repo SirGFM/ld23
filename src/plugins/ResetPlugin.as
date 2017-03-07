@@ -1,6 +1,6 @@
-package components {
+package plugins {
 	
-	import org.flixel.FlxButton;
+	import basics.ClickableSprite;
 	import org.flixel.FlxG;
 	import states.PlayState;
 	
@@ -8,13 +8,12 @@ package components {
 	 * ...
 	 * @author GFM
 	 */
-	public class ResetPlugin extends FlxButton {
+	public class ResetPlugin extends ClickableSprite {
 		
 		[Embed(source = "../../assets/gfx/resetButton.png")] private var gfx:Class;
 		
-		public function ResetPlugin(X:Number=0, Y:Number=0, Label:String=null, OnClick:Function=null) {
-			super(241, 1, "", click);
-			loadGraphic(gfx, true, false, 7, 7);
+		public function ResetPlugin(X:Number=0, Y:Number=0) {
+			super(241, 1, gfx, 7, 7);
 		}
 		
 		override public function update():void {
@@ -26,11 +25,10 @@ package components {
 			}
 		}
 		
-		private function click():void {
+		override protected function OnClick():void {
 			if (FlxG.state is PlayState) {
 				(FlxG.state as PlayState).setState(PlayState.curState);
 			}
 		}
 	}
-
 }

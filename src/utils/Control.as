@@ -8,10 +8,10 @@ package utils {
 	 */
 	public class Control {
 		
-		private var UP:String = "W";
-		private var DOWN:String = "S";
-		private var LEFT:String = "A";
-		private var RIGHT:String = "D";
+		private var UP:String = "UP";
+		private var DOWN:String = "DOWN";
+		private var LEFT:String = "LEFT";
+		private var RIGHT:String = "RIGHT";
 		private var ACTION:String = "SPACE";
 		
 		public function Control() {

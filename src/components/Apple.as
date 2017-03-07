@@ -1,5 +1,7 @@
 package components {
+	
 	import basics.BasicObj;
+	import utils.Sounds;
 	
 	/**
 	 * ...
@@ -14,6 +16,17 @@ package components {
 			acceleration.y = 0;
 		}
 		
+		override public function reset(X:Number, Y:Number):void {
+			super.reset(X, Y);
+			resize(-0.5);
+		}
+		
+		override public function kill():void {
+			super.kill();
+			if (health > 0) {
+				Sounds.playCollect();
+			}
+		}
 	}
 
 }

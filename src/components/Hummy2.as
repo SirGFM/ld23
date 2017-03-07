@@ -1,5 +1,5 @@
 package components {
-	import basics.BasicObj;
+	
 	import basics.Player;
 	import org.flixel.FlxPoint;
 	
@@ -7,11 +7,9 @@ package components {
 	 * ...
 	 * @author GFM
 	 */
-	public class Hummy extends Player {
+	public class Hummy2 extends Player{
 		
-		[Embed(source = "../../assets/gfx/p01.png")] private var gfx01:Class;
-		
-		public function Hummy(X:Number=0, Y:Number=0, Velo:FlxPoint=null) {
+		public function Hummy2(X:Number=0, Y:Number=0, Velo:FlxPoint=null) {
 			super(X, Y, 1, Velo);
 			loadGraphic(gfx01, true, true, 8, 8);
 			addAnimation("def", [0], 0, false);
@@ -21,29 +19,26 @@ package components {
 		}
 		
 		override public function update():void {
+			//if(!moveTowards) -> update
+			//else execute.moveToward
 			super.update();
 			
-			if (_eat > 0) {
-				//eat animation gets priority
-			}
-			else if (jump) {
+			if (jump) {
 				play("jump");
 			}
 			else if ((control.left || control.right) && (touching & DOWN)) {
 				play("walk");
 			}
-			else {
+			else if (!control.left && !control.right && (velocity.y <= 0) && control.j_action) {
+				_eat = 30;
+				//moveTowards = active
+				play("eat");
+			}
+			else if (_eat <= 0) {
 				play("def");
 			}
 		}
 		
-		override public function eat(obj:BasicObj):Boolean {
-			var ret:Boolean = super.eat(obj);
-			if (ret == true) {
-				_eat = 30;
-				play("eat");
-			}
-			return ret;
-		}
 	}
+
 }
